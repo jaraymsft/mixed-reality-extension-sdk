@@ -74,7 +74,20 @@ export default class SoundTest extends Test {
             'group1',
             { uri: `${this.baseUrl}/FTUI_Music.ogg` }
         );
-        const musicSoundInstance = musicButtonPromise.value.startSound(musicAssetPromise.value.id,
+
+        const videoStreamPromise = this.app.context.assetManager.createVideoStream(
+            'group1',
+            { uri: `https://www.youtube.com/watch?v=E6GAxUVs37c` }
+        );
+
+/*        const videoStreamPromise = this.app.context.assetManager.createVideoStream(
+            'group1',
+            { uri: `youtube.com/stuff` }
+        );
+        const musicSoundInstance = musicButtonPromise.value.startVideo("00000000-0000-0000-0000-000000000000",
+*/
+        const musicSoundInstance = musicButtonPromise.value.startSound(videoStreamPromise.value.id,
+        // musicAssetPromise.value.id,
             {
                 volume: 0.2,
                 looping: true,
@@ -134,7 +147,7 @@ export default class SoundTest extends Test {
             }
         };
         notesButtonBehavior.onButton('released', playNotes);
-
+/*
         const dopplerButtonPromise = MRE.Actor.CreatePrimitive(this.app.context, {
             definition: {
                 shape: MRE.PrimitiveShape.Sphere,
@@ -205,7 +218,7 @@ export default class SoundTest extends Test {
             this._dopplerSoundState = (this._dopplerSoundState + 1) % 2;
         };
         dopplerButtonBehavior.onButton('released', cycleDopplerSoundState);
-
+*/
         await this.stoppedAsync();
 
         return true;
