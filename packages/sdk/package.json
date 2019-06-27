@@ -19,11 +19,11 @@
     "npm": ">=6.4.1"
   },
   "bugs": {
-    "url": "https://github.com/Microsoft/mixed-reality-extension-sdk/issues"
+    "url": "https://github.com/mikenotter/mixed-reality-extension-sdk/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Microsoft/mixed-reality-extension-sdk.git"
+    "url": "https://github.com/mikenotter/mixed-reality-extension-sdk.git"
   },
   "scripts": {
     "clean": "tsc --build --clean",
