@@ -56,6 +56,8 @@ export type PayloadType
     | 'sync-animations'
     | 'sync-complete'
     | 'sync-request'
+    | 'test-payload'
+    | 'timer-payload'
     | 'traces'
     | 'trigger-event-raised'
     | 'user-joined'
@@ -381,4 +383,25 @@ export type InterpolateActor = Payload & {
     duration: number;
     curve: number[];
     enabled: boolean;
+};
+
+/**
+ * @hidden
+ * Bidirectional. Sync transform for an actor.
+ */
+export type TestPayload = Payload & {
+    type: 'test-payload';
+    userId: string;
+    position: number[];
+    rotation: number[];
+};
+
+/**
+ * @hidden
+ * Bidirectional. Sync transform for an actor.
+ */
+export type TimerPayload = Payload & {
+    type: 'timer-payload';
+    userId: string;
+    millis: number;
 };
