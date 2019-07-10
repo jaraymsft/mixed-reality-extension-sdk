@@ -16,8 +16,8 @@ import { OperatingModel } from '../operatingModel';
  * *** KEEP ENTRIES SORTED ***
  */
 export type PayloadType
-	= 'ack-payload'
-	| 'actor-correction'
+    = 'ack-payload'
+    | 'actor-correction'
     | 'actor-update'
     | 'app2engine-rpc'
     | 'asset-update'
@@ -411,18 +411,7 @@ export type TimerPayload = Payload & {
  * @hidden
  * Bidirectional. Sync transform for an actor.
  */
-export declare type TestPayload = Payload & {
-	type: 'test-payload';
-	userId: string;
-	position: number[];
-	rotation: number[];
-};
-
-/**
- * @hidden
- * Bidirectional. Sync transform for an actor.
- */
 export declare type AckPayload = Payload & {
-	type: 'ack-payload';
-	userId: string;
+    type: 'ack-payload';
+    userId: string;
 };
