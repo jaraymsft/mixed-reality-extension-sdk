@@ -243,6 +243,38 @@ const CreateActorRule: Rule = {
  * *** KEEP ENTRIES SORTED ***
  */
 export const Rules: { [id in Payloads.PayloadType]: Rule } = {
+	// ========================================================================
+	'ack-payload': {
+		...DefaultRule,
+		synchronization: {
+			stage: 'always',
+			before: 'allow',
+			during: 'allow',
+			after: 'allow'
+		},
+		client: {
+			...DefaultRule.client,
+			shouldSendToUser: (message: Message<Payloads.AckPayload>, userId, session, client) => {
+				const exclusiveUser = message.payload.userId;
+				// return exclusiveUser ? exclusiveUser === userId : null;
+				return null;
+			}
+		},
+		session: {
+			...DefaultRule.session,
+			beforeReceiveFromClient: (
+				session: Session,
+				client: Client,
+				message: Message<Payloads.AckPayload>
+			) => {
+				// Sync the change to the other clients.
+				// session.sendPayloadToClients(message.payload, (value) => value.id !== client.id);
+				session.sendPayloadToClients(message.payload, (value) => true);
+
+				return undefined;
+			}
+		}
+	},
     // ========================================================================
     'actor-correction': {
         ...DefaultRule,
