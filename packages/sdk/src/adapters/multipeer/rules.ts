@@ -1062,7 +1062,7 @@ export const Rules: { [id in Payloads.PayloadType]: Rule } = {
     'sync-request': ClientOnlyRule,
 
     // ========================================================================
-    'test-payload': {
+    'transform-payload': {
         ...DefaultRule,
         synchronization: {
             stage: 'always',
@@ -1072,7 +1072,7 @@ export const Rules: { [id in Payloads.PayloadType]: Rule } = {
         },
         client: {
             ...DefaultRule.client,
-            shouldSendToUser: (message: Message<Payloads.TestPayload>, userId, session, client) => {
+            shouldSendToUser: (message: Message<Payloads.TransformPayload>, userId, session, client) => {
                 const exclusiveUser = message.payload.userId;
                 // return exclusiveUser ? exclusiveUser === userId : null;
                 return null;
@@ -1083,7 +1083,7 @@ export const Rules: { [id in Payloads.PayloadType]: Rule } = {
             beforeReceiveFromClient: (
                 session: Session,
                 client: Client,
-                message: Message<Payloads.TestPayload>
+                message: Message<Payloads.TransformPayload>
             ) => {
                 // Sync the change to the other clients.
                 // session.sendPayloadToClients(message.payload, (value) => value.id !== client.id);
@@ -1093,38 +1093,7 @@ export const Rules: { [id in Payloads.PayloadType]: Rule } = {
             }
         }
     },
-    // ========================================================================
-    'timer-payload': {
-        ...DefaultRule,
-        synchronization: {
-            stage: 'always',
-            before: 'allow',
-            during: 'allow',
-            after: 'allow'
-        },
-        client: {
-            ...DefaultRule.client,
-            shouldSendToUser: (message: Message<Payloads.TestPayload>, userId, session, client) => {
-                const exclusiveUser = message.payload.userId;
-                // return exclusiveUser ? exclusiveUser === userId : null;
-                return null;
-            }
-        },
-        session: {
-            ...DefaultRule.session,
-            beforeReceiveFromClient: (
-                session: Session,
-                client: Client,
-                message: Message<Payloads.TestPayload>
-            ) => {
-                // Sync the change to the other clients.
-                // session.sendPayloadToClients(message.payload, (value) => value.id !== client.id);
-                session.sendPayloadToClients(message.payload, (value) => true);
 
-                return undefined;
-            }
-        }
-    },
     // ========================================================================
     'traces': ClientOnlyRule,
 

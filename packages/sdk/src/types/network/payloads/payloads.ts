@@ -57,9 +57,8 @@ export type PayloadType
     | 'sync-animations'
     | 'sync-complete'
     | 'sync-request'
-    | 'test-payload'
-    | 'timer-payload'
     | 'traces'
+    | 'transform-payload'
     | 'trigger-event-raised'
     | 'user-joined'
     | 'user-left'
@@ -390,28 +389,20 @@ export type InterpolateActor = Payload & {
  * @hidden
  * Bidirectional. Sync transform for an actor.
  */
-export type TestPayload = Payload & {
-    type: 'test-payload';
+export type TransformPayload = Payload & {
+    type: 'transform-payload';
     userId: string;
+    timeStampId: number;
     position: number[];
     rotation: number[];
 };
 
 /**
  * @hidden
- * Bidirectional. Sync transform for an actor.
- */
-export type TimerPayload = Payload & {
-    type: 'timer-payload';
-    userId: string;
-    millis: number;
-};
-
-/**
- * @hidden
- * Bidirectional. Sync transform for an actor.
+ * Bidirectional. Acknowledge RPC receipt. Used for measuring network latency.
  */
 export declare type AckPayload = Payload & {
     type: 'ack-payload';
     userId: string;
+    timeStampId: number;
 };
