@@ -1074,8 +1074,7 @@ export const Rules: { [id in Payloads.PayloadType]: Rule } = {
             ...DefaultRule.client,
             shouldSendToUser: (message: Message<Payloads.TransformPayload>, userId, session, client) => {
                 const exclusiveUser = message.payload.userId;
-                // return exclusiveUser ? exclusiveUser === userId : null;
-                return null;
+                return exclusiveUser ? exclusiveUser !== userId : null;
             }
         },
         session: {
@@ -1086,9 +1085,7 @@ export const Rules: { [id in Payloads.PayloadType]: Rule } = {
                 message: Message<Payloads.TransformPayload>
             ) => {
                 // Sync the change to the other clients.
-                // session.sendPayloadToClients(message.payload, (value) => value.id !== client.id);
-                session.sendPayloadToClients(message.payload, (value) => true);
-
+                session.sendPayloadToClients(message.payload, (value) => value.id !== client.id);
                 return undefined;
             }
         }

@@ -392,6 +392,7 @@ export type InterpolateActor = Payload & {
 export type TransformPayload = Payload & {
     type: 'transform-payload';
     userId: string;
+    attachmentType: number;
     timeStampId: number;
     position: number[];
     rotation: number[];
