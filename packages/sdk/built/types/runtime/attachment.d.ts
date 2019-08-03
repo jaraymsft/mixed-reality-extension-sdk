@@ -5,7 +5,7 @@
 /**
  * The complete set of attach points.
  */
-export declare type AttachPoint = 'none' | 'camera' | 'head' | 'neck' | 'hips' | 'center-eye' | 'spine-top' | 'spine-middle' | 'spine-bottom' | 'left-eye' | 'left-upper-leg' | 'left-lower-leg' | 'left-foot' | 'left-toes' | 'left-shoulder' | 'left-upper-arm' | 'left-lower-arm' | 'left-hand' | 'left-thumb' | 'left-index' | 'left-middle' | 'left-ring' | 'left-pinky' | 'right-eye' | 'right-upper-leg' | 'right-lower-leg' | 'right-foot' | 'right-toes' | 'right-shoulder' | 'right-upper-arm' | 'right-lower-arm' | 'right-hand' | 'right-thumb' | 'right-index' | 'right-middle' | 'right-ring' | 'right-pinky';
+export declare type AttachPoint = 'none' | 'camera' | 'head' | 'neck' | 'hips' | 'center-eye' | 'spine-top' | 'spine-middle' | 'spine-bottom' | 'left-eye' | 'left-upper-leg' | 'left-lower-leg' | 'left-foot' | 'left-toes' | 'left-shoulder' | 'left-upper-arm' | 'left-lower-arm' | 'left-hand' | 'left-thumb' | 'left-index' | 'left-middle' | 'left-ring' | 'left-pinky' | 'right-eye' | 'right-upper-leg' | 'right-lower-leg' | 'right-foot' | 'right-toes' | 'right-shoulder' | 'right-upper-arm' | 'right-lower-arm' | 'right-hand' | 'right-thumb' | 'right-index' | 'right-middle' | 'right-ring' | 'right-pinky' | 'tool';
 /**
  * The characteristics of an active attachment.
  */

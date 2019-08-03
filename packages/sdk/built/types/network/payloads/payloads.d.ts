@@ -13,7 +13,7 @@ import { OperatingModel } from '../operatingModel';
  * @hidden
  * *** KEEP ENTRIES SORTED ***
  */
-export declare type PayloadType = 'ack-payload' | 'actor-correction' | 'actor-update' | 'app2engine-rpc' | 'asset-update' | 'assets-loaded' | 'collision-event-raised' | 'create-animation' | 'create-asset' | 'create-empty' | 'create-from-gltf' | 'create-from-library' | 'create-from-prefab' | 'create-primitive' | 'destroy-actors' | 'engine2app-rpc' | 'handshake' | 'handshake-complete' | 'handshake-reply' | 'heartbeat' | 'heartbeat-reply' | 'interpolate-actor' | 'load-assets' | 'multi-operation-result' | 'object-spawned' | 'operation-result' | 'perform-action' | 'rigidbody-add-force' | 'rigidbody-add-force-at-position' | 'rigidbody-add-relative-torque' | 'rigidbody-add-torque' | 'rigidbody-commands' | 'rigidbody-move-position' | 'rigidbody-move-rotation' | 'set-animation-state' | 'set-authoritative' | 'set-behavior' | 'set-sound-state' | 'sync-animations' | 'sync-complete' | 'sync-request' | 'test-payload' | 'timer-payload' | 'traces' | 'trigger-event-raised' | 'user-joined' | 'user-left' | 'user-update';
+export declare type PayloadType = 'ack-payload' | 'actor-correction' | 'actor-update' | 'app2engine-rpc' | 'asset-update' | 'assets-loaded' | 'collision-event-raised' | 'create-animation' | 'create-asset' | 'create-empty' | 'create-from-gltf' | 'create-from-library' | 'create-from-prefab' | 'create-primitive' | 'destroy-actors' | 'engine2app-rpc' | 'handshake' | 'handshake-complete' | 'handshake-reply' | 'heartbeat' | 'heartbeat-reply' | 'interpolate-actor' | 'load-assets' | 'multi-operation-result' | 'object-spawned' | 'operation-result' | 'perform-action' | 'rigidbody-add-force' | 'rigidbody-add-force-at-position' | 'rigidbody-add-relative-torque' | 'rigidbody-add-torque' | 'rigidbody-commands' | 'rigidbody-move-position' | 'rigidbody-move-rotation' | 'set-animation-state' | 'set-authoritative' | 'set-behavior' | 'set-sound-state' | 'sync-animations' | 'sync-complete' | 'sync-request' | 'traces' | 'transform-payload' | 'trigger-event-raised' | 'user-joined' | 'user-left' | 'user-update';
 /**
  * @hidden
  * Base interface for Payloads.
@@ -305,27 +305,21 @@ export declare type InterpolateActor = Payload & {
  * @hidden
  * Bidirectional. Sync transform for an actor.
  */
-export declare type TestPayload = Payload & {
-    type: 'test-payload';
+export declare type TransformPayload = Payload & {
+    type: 'transform-payload';
     userId: string;
+    attachmentType: number;
+    timeStampId: number;
     position: number[];
     rotation: number[];
 };
 /**
  * @hidden
- * Bidirectional. Sync transform for an actor.
- */
-export declare type TimerPayload = Payload & {
-    type: 'timer-payload';
-    userId: string;
-    millis: number;
-};
-/**
- * @hidden
- * Bidirectional. Sync transform for an actor.
+ * Bidirectional. Acknowledge RPC receipt. Used for measuring network latency.
  */
 export declare type AckPayload = Payload & {
     type: 'ack-payload';
     userId: string;
+    timeStampId: number;
 };
 //# sourceMappingURL=payloads.d.ts.map

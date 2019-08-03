@@ -582,35 +582,17 @@ exports.Rules = {
     // ========================================================================
     'sync-request': ClientOnlyRule,
     // ========================================================================
-    'test-payload': Object.assign({}, exports.DefaultRule, { synchronization: {
+    'transform-payload': Object.assign({}, exports.DefaultRule, { synchronization: {
             stage: 'always',
             before: 'allow',
             during: 'allow',
             after: 'allow'
         }, client: Object.assign({}, exports.DefaultRule.client, { shouldSendToUser: (message, userId, session, client) => {
                 const exclusiveUser = message.payload.userId;
-                // return exclusiveUser ? exclusiveUser === userId : null;
-                return null;
+                return exclusiveUser ? exclusiveUser !== userId : null;
             } }), session: Object.assign({}, exports.DefaultRule.session, { beforeReceiveFromClient: (session, client, message) => {
                 // Sync the change to the other clients.
-                // session.sendPayloadToClients(message.payload, (value) => value.id !== client.id);
-                session.sendPayloadToClients(message.payload, (value) => true);
-                return undefined;
-            } }) }),
-    // ========================================================================
-    'timer-payload': Object.assign({}, exports.DefaultRule, { synchronization: {
-            stage: 'always',
-            before: 'allow',
-            during: 'allow',
-            after: 'allow'
-        }, client: Object.assign({}, exports.DefaultRule.client, { shouldSendToUser: (message, userId, session, client) => {
-                const exclusiveUser = message.payload.userId;
-                // return exclusiveUser ? exclusiveUser === userId : null;
-                return null;
-            } }), session: Object.assign({}, exports.DefaultRule.session, { beforeReceiveFromClient: (session, client, message) => {
-                // Sync the change to the other clients.
-                // session.sendPayloadToClients(message.payload, (value) => value.id !== client.id);
-                session.sendPayloadToClients(message.payload, (value) => true);
+                session.sendPayloadToClients(message.payload, (value) => value.id !== client.id);
                 return undefined;
             } }) }),
     // ========================================================================
