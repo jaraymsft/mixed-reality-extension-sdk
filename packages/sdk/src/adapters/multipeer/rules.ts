@@ -679,6 +679,36 @@ export const Rules: { [id in Payloads.PayloadType]: Rule } = {
     },
 
     // ========================================================================
+    'json-message-payload': {
+        ...DefaultRule,
+        synchronization: {
+            stage: 'always',
+            before: 'allow',
+            during: 'allow',
+            after: 'allow'
+        },
+        client: {
+            ...DefaultRule.client,
+            shouldSendToUser: (message: Message<Payloads.TransformPayload>, userId, session, client) => {
+                return null;
+            }
+        },
+        session: {
+            ...DefaultRule.session,
+            beforeReceiveFromClient: (
+                session: Session,
+                client: Client,
+                message: Message<Payloads.TransformPayload>
+            ) => {
+                // Sync the change to the other clients.
+                // session.sendPayloadToClients(message.payload, (value) => value.userId !== client.id);
+                session.sendPayloadToClients(message.payload, (value) => true);
+                return undefined;
+            }
+        }
+    },
+
+    // ========================================================================
     'load-assets': {
         ...DefaultRule,
         synchronization: {

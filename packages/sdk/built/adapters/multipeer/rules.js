@@ -350,6 +350,20 @@ exports.Rules = {
                 return message;
             } }) }),
     // ========================================================================
+    'json-message-payload': Object.assign({}, exports.DefaultRule, { synchronization: {
+            stage: 'always',
+            before: 'allow',
+            during: 'allow',
+            after: 'allow'
+        }, client: Object.assign({}, exports.DefaultRule.client, { shouldSendToUser: (message, userId, session, client) => {
+                return null;
+            } }), session: Object.assign({}, exports.DefaultRule.session, { beforeReceiveFromClient: (session, client, message) => {
+                // Sync the change to the other clients.
+                // session.sendPayloadToClients(message.payload, (value) => value.userId !== client.id);
+                session.sendPayloadToClients(message.payload, (value) => true);
+                return undefined;
+            } }) }),
+    // ========================================================================
     'load-assets': Object.assign({}, exports.DefaultRule, { synchronization: {
             stage: 'load-assets',
             before: 'ignore',

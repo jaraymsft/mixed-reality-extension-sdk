@@ -38,6 +38,7 @@ export type PayloadType
     | 'heartbeat'
     | 'heartbeat-reply'
     | 'interpolate-actor'
+    | 'json-message-payload'
     | 'load-assets'
     | 'multi-operation-result'
     | 'object-spawned'
@@ -406,4 +407,15 @@ export declare type AckPayload = Payload & {
     type: 'ack-payload';
     userId: string;
     timeStampId: number;
+};
+
+/**
+ * @hidden
+ * Bidirectional. Generic json payload.
+ */
+export type JsonPayload = Payload & {
+    type: 'json-message-payload';
+    userId: string;
+    payloadType: string;
+    jsonBody: string;
 };
