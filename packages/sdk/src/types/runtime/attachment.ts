@@ -46,6 +46,7 @@ export type AttachPoint
     | 'right-middle'
     | 'right-ring'
     | 'right-pinky'
+    | 'tool'
     ;
 
 /**
